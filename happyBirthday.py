@@ -186,6 +186,9 @@ def main():
     # print_name_and_message()
     # print_name_and_birthday()
 
+    # add_entry(name, email, day, month, message) # when adding someone new to the database
+    # set_message(name, message) # to change the message of a particular person
+
     """Will see if there are any birth days on today's date.
     If there are, everything will proceed and an email will be send.
     Otherwise an error will be thrown."""

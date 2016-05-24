@@ -51,7 +51,7 @@ def add_to_dictionary(person, email, day, month):
     shelf_file_email.close()
 
 
-def get_name_and_email(day, month):
+def get_name_and_email(day, month): # at some point I will modify this to work with name/email
     """
     :param day:  the current day (use datetime module datetime.day)
     :param month: the current month (use datetime module datetime.month)

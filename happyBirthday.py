@@ -30,10 +30,13 @@ def add_to_dictionary(person, email, day, month):
     shelf_file = shelve.open('birthdays')  # opens birthdays file
     name_dates = shelve.open('nameDates')
     shelf_file_email = shelve.open('emails')  # opens emails file
+
     """Store the month and day in a list for future concatination"""
     lst = [str(month), str(day)]
+
     """Write to the name->HumanReadableDate file."""
     name_dates[person] = '/'.join(lst)
+
     """Hash the day + month (key) and set it equal to the name (value)."""
     shelf_file[str(hash(day)
                    +
@@ -41,6 +44,7 @@ def add_to_dictionary(person, email, day, month):
                        month))] = person  # sets a hashcode for the day and month then sets those 2 equal to a persons name
 
     shelf_file_email[person] = email  # takes the persons name and connects it to an email
+
     """Close the files."""
     shelf_file.close()
     name_dates.close()
@@ -55,22 +59,28 @@ def get_name_and_email(day, month):
     """
     shelf_file = shelve.open('birthdays')  # re opens the birthdays file
     shelf_file_email = shelve.open('emails')  # re opens the emails file
+
     """Get the name and email from the shelve files"""
     name = shelf_file[str(hash(day) + hash(month))]
     email = shelf_file_email[name]  # obtains the persons email
+
     """Turn the name and email into a list."""
     lst = [name, email]
+
     """Close the files."""
     shelf_file_email.close()
     shelf_file.close()
+
     """Return the list, [name, email]."""
     return lst  # returns list name , email
 
 
 def get_message(name):
     message = shelve.open('messages')
+
     """Get the message from the given name."""
     msg = message[name]
+
     """Close the file."""
     message.close()
     return msg
@@ -100,6 +110,7 @@ def del_entry(name):  # I need to comopletely redo how I access the files to mak
     day_bool = False
     month = ''
     day = ''
+
     """Go through the dates to separate the '/'
     and split the string into month and day."""
     for i in dates:
@@ -110,12 +121,14 @@ def del_entry(name):  # I need to comopletely redo how I access the files to mak
             month += i
         else:
             day += i
+
     """Deletion step."""
     code = str(hash(day) + hash(month))
     del message_file[name]
     del shelf_file[code]
     del name_dates[name]
     del shelf_file_email[name]
+
     """Closing of files."""
     shelf_file.close()
     name_dates.close()
@@ -125,8 +138,10 @@ def del_entry(name):  # I need to comopletely redo how I access the files to mak
 
 def set_message(name, message=''):
     message_file = shelve.open('messages')
+
     """Set the name (key) and message (value)."""
     message_file[name] = message
+
     """Closing calls."""
     message_file.close()
 
@@ -145,6 +160,7 @@ def print_name_and_email():
 
 def print_name_and_message():
     name_message = shelve.open('messages')
+
     """Go through the files keys and print them"""
     for i in name_message.keys():
         print(str(i), ':', str(name_message[i]))
@@ -153,6 +169,7 @@ def print_name_and_message():
 
 def print_name_and_birthday():
     name_date = shelve.open('nameDates')
+
     """Go through the files keys and print them."""
     for i in name_date.keys():
         print(str(i), ':', str(name_date[i]))
@@ -163,6 +180,7 @@ def main():
     print_name_and_email, print_name_and_message,
     set_message"""
     date = datetime.datetime.now()
+
     """Print statements"""
     # print_name_and_email()
     # print_name_and_message()

@@ -99,13 +99,13 @@ def send_email(name, recieptient_email):
                          SUBJECT, name, get_message(name), NAME)) # See above to set 2 of these. I plan on making 'subject' come from a dictionary at a later point.
 
 
-def del_entry(name):  # I need to comopletely redo how I access the files to make them easier to modify
+def del_entry(name):
     shelf_file = shelve.open('birthdays')
     name_dates = shelve.open('nameDates')
     message_file = shelve.open('messages')
     shelf_file_email = shelve.open('emails')
-    """Get the date from the given name."""
 
+    """Get the date from the given name."""
     dates = name_dates[name]
     day_bool = False
     month = ''
